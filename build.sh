@@ -47,6 +47,8 @@ export date=$(date +"%y%m%d%H%M%S")
 [ -n "$USE_KSU" ] && export ZIP_NAME="GKI-$kver-KSU-$date.zip" || export ZIP_NAME="GKI-$kver-$date.zip"
 
 cd $WORK_DIR/Anykernel3
+sed -i "s/DUMMY1/$kver/g" anykernel.sh
+[ -n "$USE_KSU" ] && sed -i 's/DUMMY2/(KSU VARIANT)/g' anykernel.sh || sed -i 's/DUMMY2/(NON-KSU VARIANT)/g' anykernel.sh
 cp $IMAGE .
 zip -r9 $ZIP_NAME *
 mv $ZIP_NAME $WORK_DIR
