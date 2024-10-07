@@ -70,4 +70,4 @@ upload_file() {
     fi
 }
 
-upload_file "$WORK_DIR/$ZIP_NAME" "*GKI $kver $([-n "$USE_KSU" ] && printf "KSU ")// $date*"
+upload_file "$WORK_DIR/$ZIP_NAME" "*GKI $kver $([ -n "$USE_KSU" ] && printf "KSU ")// $date*"
