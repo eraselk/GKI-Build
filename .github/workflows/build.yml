@@ -1,0 +1,42 @@
+name: Build GKI
+
+on:
+  workflow_dispatch:
+   inputs:
+    KSU:
+     description: 'Do you want to use KSU?'
+     required: true
+     default: 'No'
+     type: choice
+     options:
+     - 'Yes'
+     - 'No'
+     
+jobs:
+  build:
+    name: Build GKI Kernel by ${{ github.actor }}
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Free up storage
+      uses: rokibhasansagar/slimhub_actions@main
+
+    - name: Swap Space
+      uses: pierotofy/set-swap-space@master
+      with:
+        swap-size-gb: 10
+
+    - name: Build
+      run: |
+       [ -x "build.sh" ] || chmod a+x build.sh
+       [ "${{ inputs.KSU }}" = "Yes" ] && export USE_KSU=1
+       export chat_id="${{ secrets.CHAT_ID }}"
+       export token="${{ secrets.TOKEN }}"
+       ./build.sh
