@@ -28,17 +28,14 @@ echo
 ## sync manifest
 ~/bin/repo init -u https://github.com/eraselk/kernel-manifest -b main
 ~/bin/repo sync -j$(nproc --all)
-echo
 
 ## kernelsu
 [ -n "$USE_KSU" ] && curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s v1.0.1
-echo
 
 ## build gki
 export ARCH=arm64
 export DEFCONFIG="gki_defconfig"
 LTO=thin BUILD_CONFIG=common/build.config.gki.aarch64 build/build.sh
-echo
 
 ## zipping
 cd $WORK_DIR/common
@@ -64,7 +61,7 @@ upload_file() {
         chmod 777 $file
         curl -s -F document=@$file "https://api.telegram.org/bot$token/sendDocument" \
         -F chat_id="$chat_id" \
-        -F "disable_web_page_preview=true" \         
+        -F "disable_web_page_preview=true" \
         -F "parse_mode=markdown" \
         -F caption="$msg"
     else
@@ -73,4 +70,4 @@ upload_file() {
     fi
 }
 
-upload_file "$WORK_DIR/$ZIP_NAME" "*GKI $kver // $date*"
+upload_file "$WORK_DIR/$ZIP_NAME" "*GKI $kver $([-n "$USE_KSU" ] && echo KSU) // $date*"
