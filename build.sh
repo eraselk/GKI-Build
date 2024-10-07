@@ -2,12 +2,12 @@
 
 [ -z "$chat_id" ] && {
     echo "error: chat_id"
-    ret=false
+    ret="exit 1"
 }
 
 [ -z "$token" ] && {
     echo "error: token"
-    ret=false
+    ret="exit 1"
 }
 
 eval "$ret"
