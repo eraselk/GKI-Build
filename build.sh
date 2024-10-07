@@ -23,14 +23,14 @@ mkdir ~/bin
 curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
 chmod a+x ~/bin/repo
 git clone --depth=1 https://github.com/eraselk/Anykernel3 -b gki
-echo
 
 ## sync manifest
 ~/bin/repo init -u https://github.com/eraselk/kernel-manifest -b main
 ~/bin/repo sync -j$(nproc --all)
 
 ## kernelsu
-[ -n "$USE_KSU" ] && curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s v1.0.1
+KSU_VERSION='v1.0.1'
+[ -n "$USE_KSU" ] && curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s $KSU_VERSION
 
 ## build gki
 export ARCH=arm64
