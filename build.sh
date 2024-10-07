@@ -35,7 +35,7 @@ KSU_VERSION='v1.0.1'
 ## build gki
 export ARCH=arm64
 export DEFCONFIG="gki_defconfig"
-LTO=thin BUILD_CONFIG=common/build.config.gki.aarch64 build/build.sh
+LTO=full BUILD_CONFIG=common/build.config.gki.aarch64 build/build.sh -j$(nproc --all)
 
 ## zipping
 cd $WORK_DIR/common
