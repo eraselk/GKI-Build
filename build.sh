@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 [ -z "$chat_id" ] && {
     echo "error: chat_id"
