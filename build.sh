@@ -29,15 +29,13 @@ git clone --depth=1 https://github.com/eraselk/Anykernel3 -b gki
 ~/bin/repo init -u https://github.com/eraselk/kernel-manifest -b main
 ~/bin/repo sync -j$(nproc --all)
 
-## clone clank
-CLANG_VERSION='r536225'
-CLANG_LINK="https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-${CLANG_VERSION}.tar.gz"
+## clank clank
+CLANG_VERSION='clang-r536225'
+CLANG_LINK="https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_$CLANG_VERSION"
 
 rm -rf prebuilts-master
-mkdir -p prebuilts-master/clang/host/linux-x86/clang-$CLANG_VERSION
-wget -q $CLANG_LINK
-tar -xf *.tar.gz -C prebuilts-master/clang/host/linux-x86/clang-$CLANG_VERSION
-rm -f *.tar.gz
+mkdir -p prebuilts-master/clang/host/linux-x86
+git clone --depth=1 $CLANK_LINK -b 14.0 prebuilts-master/clang/host/linux-x86/$CLANG_VERSION
 
 ## kernelsu
 KSU_VERSION='v1.0.1'
