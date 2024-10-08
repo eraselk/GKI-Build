@@ -35,7 +35,7 @@ CLANG_LINK="https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux
 
 rm -rf prebuilts-master
 mkdir -p prebuilts-master/clang/host/linux-x86
-git clone --depth=1 $CLANK_LINK -b 14.0 prebuilts-master/clang/host/linux-x86/$CLANG_VERSION
+git clone --depth=1 $CLANG_LINK -b 14.0 prebuilts-master/clang/host/linux-x86/$CLANG_VERSION
 
 ## kernelsu
 KSU_VERSION='v1.0.1'
