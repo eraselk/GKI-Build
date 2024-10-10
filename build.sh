@@ -42,7 +42,7 @@ KSU_VERSION='v1.0.1'
 [ -n "$USE_KSU" ] && curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s $KSU_VERSION
 
 ## build gki
-LTO=full BUILD_CONFIG=common/build.config.gki.aarch64 build/build.sh -j$(nproc --all)
+LTO=full BUILD_CONFIG=common/build.config.mtk.aarch64 build/build.sh -j$(nproc --all)
 
 ## zipping
 cd $WORK_DIR/common
