@@ -19,7 +19,7 @@ IMAGE=$WORK_DIR/out/android12-5.10/dist/Image
 sudo ln -sf "/usr/share/zoneinfo/Asia/Makassar" /etc/localtime
 sudo apt update -y
 sudo apt upgrade -y
-sudo apt install -y bc bison build-essential ccache curl flex glibc-source g++-multilib gcc-multilib binutils-aarch64-linux-gnu git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-gtk3-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev python2
+sudo apt install -y bc bison build-essential curl flex glibc-source g++-multilib gcc-multilib binutils-aarch64-linux-gnu git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-gtk3-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev python2
 mkdir ~/bin
 curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
 chmod a+x ~/bin/repo
@@ -42,8 +42,6 @@ KSU_VERSION='v1.0.1'
 [ -n "$USE_KSU" ] && curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s $KSU_VERSION
 
 ## build gki
-export ARCH=arm64
-export DEFCONFIG="gki_defconfig"
 LTO=full BUILD_CONFIG=common/build.config.gki.aarch64 build/build.sh -j$(nproc --all)
 
 ## zipping
@@ -53,7 +51,7 @@ export kver=$(make kernelversion 2>/dev/null)
 cd $WORK_DIR
 
 export date=$(date +"%y%m%d%H%M%S")
-[ -n "$USE_KSU" ] && export ZIP_NAME="GKI-$kver-KSU-$date.zip" || export ZIP_NAME="GKI-$kver-$date.zip"
+[ -n "$USE_KSU" ] && export ZIP_NAME="gold-kernel-$kver-KSU-$date.zip" || export ZIP_NAME="gold-kernel-$kver-$date.zip"
 
 cd $WORK_DIR/Anykernel3
 sed -i "s/DUMMY1/$kver/g" anykernel.sh
@@ -81,4 +79,4 @@ upload_file() {
     fi
 }
 
-upload_file "$WORK_DIR/$ZIP_NAME" "*GKI $kver $([ -n "$USE_KSU" ] && printf "KSU ")// $date*"
+upload_file "$WORK_DIR/$ZIP_NAME" "*Gold Kernel $kver $([ -n "$USE_KSU" ] && printf "KSU ")// $date*"
