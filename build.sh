@@ -15,7 +15,7 @@ eval "$ret"
 
 ## environment related
 WORK_DIR=$(pwd)
-IMAGE=$WORK_DIR/out/android12-5.10/dist/Image
+IMAGE=$WORK_DIR/out/android12-5.10/dist/Image.gz
 sudo ln -sf "/usr/share/zoneinfo/Asia/Makassar" /etc/localtime
 sudo apt update -y
 sudo apt upgrade -y
