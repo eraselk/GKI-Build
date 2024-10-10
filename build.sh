@@ -23,7 +23,7 @@ sudo apt install -y bc bison build-essential curl flex glibc-source g++-multilib
 mkdir ~/bin
 curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
 chmod a+x ~/bin/repo
-git clone --depth=1 https://github.com/eraselk/Anykernel3 -b gki
+git clone --depth=1 https://github.com/eraselk/Anykernel3 -b gold
 
 ## sync manifest
 ~/bin/repo init -u https://github.com/eraselk/kernel-manifest -b main
